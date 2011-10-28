@@ -25,7 +25,10 @@ import local.bin.LabCheckActivity.seqComparator;
 import org.apache.http.util.ByteArrayBuffer;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -104,13 +107,27 @@ public class DiningMenu  extends ListActivity {
 	
 	enum diningCourtID {EAR, FORD, HILL, WILEY, WIN};
 
-	
+	public boolean isOnline() {
+	    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	    if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+	        return true;
+	    }
+	    return false;
+	}
 
 	class buttonListen implements OnClickListener{
 			
 			@Override
 			public void onClick(View v){
 			
+				
+				if(!isOnline()){
+					Toast.makeText(DiningMenu.this,"you are offline, cannot display location", Toast.LENGTH_LONG).show();
+					return;
+				}
+				
+				
 				Intent gotoMapview = new Intent();
 				gotoMapview.setClass(DiningMenu.this, mapview.class);
 				

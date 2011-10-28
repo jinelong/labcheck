@@ -47,7 +47,7 @@ public class splash extends Activity {
                 Log.d("downloader", "downloaded file name:" + fileName);
                 /* Open a connection to that URL. */
                 URLConnection ucon = url.openConnection();
-                ucon.setConnectTimeout(3000);
+                ucon.setConnectTimeout(1000);
                 /*
                  * Define InputStreams to read from the URLConnection.
                  */
@@ -121,27 +121,27 @@ public class splash extends Activity {
 			        Toast.makeText(splash.this,"Menu downloaded", Toast.LENGTH_LONG).show();
 				
 			        downloadAddr = "https://www.purdue.edu/apps/ics/LabMap";
-			        if(DownloadFromUrl(downloadAddr, PATH+"lab")){
+			        if(!DownloadFromUrl(downloadAddr, PATH+"lab")){
 			        	
 			        	runOnUiThread(new Runnable(){
 							public void run() {
-								Toast.makeText(splash.this,"you are not online, using caching file", Toast.LENGTH_LONG).show();
+								Toast.makeText(splash.this,"cannot connect to ITAP server, use cache file", Toast.LENGTH_LONG).show();
 							}
 							});
 			        }
 			        
 			        
-			        startActivity(new Intent().setClass(splash.this,LabCheckActivity.class));
+			        startActivity(new Intent().setClass(splash.this,tab.class));
 			        finish();
 			}else{
 				
 				runOnUiThread(new Runnable(){
 					public void run() {
-						Toast.makeText(splash.this,"Connection fail, will use cache data", Toast.LENGTH_LONG).show();
+						Toast.makeText(splash.this,"you are in offline mode", Toast.LENGTH_LONG).show();
 					}
 					});
 				
-				startActivity(new Intent().setClass(splash.this,LabCheckActivity.class));
+				startActivity(new Intent().setClass(splash.this,tab.class));
 		        finish();	
 			}
 			

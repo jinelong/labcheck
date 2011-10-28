@@ -26,6 +26,8 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -139,11 +141,20 @@ public class LabCheckActivity extends ListActivity {
 	String currentLatitude = null;
 	String currentLongtitude = null;
 	
+	public boolean isOnline() {
+	    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	    if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+	        return true;
+	    }
+	    return false;
+	}
+	
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 
 		
-		menu.add(0, 1, 1, "find me a PC");
+		menu.add(0, 1, 1, "TabView");
 		menu.add(0, 2, 2, "Dining Menu");
 		menu.add(0, 3, 3, "About");
 		menu.add(0, 4, 4, "quit");
@@ -178,8 +189,9 @@ public class LabCheckActivity extends ListActivity {
 
 		// help
 		case 1:
-			updateList(COMPUTER.WIN);
-			//startActivity(help);
+			Intent gotoTab = new Intent();
+			gotoTab.setClass(LabCheckActivity.this, tab.class);
+			this.startActivity(gotoTab);
 			break;
 		}// switch
 		return super.onOptionsItemSelected(item);
@@ -189,6 +201,11 @@ public class LabCheckActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
+
+		if(!isOnline()){
+			Toast.makeText(LabCheckActivity.this,"you are offline, cannot display location", Toast.LENGTH_LONG).show();
+			return;
+		}
 		
     	Intent gotoMapview = new Intent();
 		gotoMapview.setClass(LabCheckActivity.this, mapview.class);

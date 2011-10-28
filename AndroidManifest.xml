@@ -22,9 +22,12 @@
         <activity 
       	   android:name=".mapview"
       	   android:theme="@android:style/Theme.NoTitleBar"
-        >
-     	
-        </activity>
+        ></activity>
+        
+         <activity 
+      	   android:name=".tab"
+      	   android:theme="@android:style/Theme.NoTitleBar"
+        ></activity>
         
         <activity android:name=".about" 
 					android:label="About"
