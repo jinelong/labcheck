@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Calendar;
 
 import org.apache.http.util.ByteArrayBuffer;
 
@@ -25,8 +26,15 @@ import android.widget.Toast;
 
 public class splash extends Activity {
 	private TextView t = null;
-	final String PATH = "/mnt/sdcard/lab";
+	final String PATH = "/sdcard/";
 	final String ADDR = "https://www.purdue.edu/apps/ics/LabMap";
+	
+	private final int EARHART = 2;
+	private final int FORD = 10;
+	private final int HILLENBRAND = 9;
+	private final int WILEY = 4;
+	private final int WINDSOR = 11;
+	
 	
 	public boolean DownloadFromUrl(String imageURL, String fileName) {  //this is the downloader method
         try {
@@ -39,7 +47,7 @@ public class splash extends Activity {
                 Log.d("downloader", "downloaded file name:" + fileName);
                 /* Open a connection to that URL. */
                 URLConnection ucon = url.openConnection();
-
+                ucon.setConnectTimeout(3000);
                 /*
                  * Define InputStreams to read from the URLConnection.
                  */
@@ -83,35 +91,65 @@ public class splash extends Activity {
 	Runnable a = new Runnable(){
 		
 		public void run(){
-			/*
-			 * 1. check internet connection
-			 * 2. if no internet connection, inform
-			 * 3. otherwise, try to downlaod the webpage
-			 * 
-			 */
-			
 			//if(isOnline() && DownloadFromUrl(ADDR, PATH)){
 			if(isOnline()){
-				startActivity(new Intent().setClass(splash.this,LabCheckActivity.class));
-				finish();
+				
+				//start downloading stuff
+					final Calendar c = Calendar.getInstance();
+			        int mYear = c.get(Calendar.YEAR);
+			        int mMonth = c.get(Calendar.MONTH)+1;
+			        int mDay = c.get(Calendar.DAY_OF_MONTH);
+			   
+			        //download today's menu from 5 dining courts
+			    	
+			        String 
+			        downloadAddr = "http://www.housing.purdue.edu/Menus/menu.aspx?hallID="+EARHART+"&date=" + mMonth + "/" + mDay + "/"+ mYear;
+			        DownloadFromUrl(downloadAddr, PATH+"menu"+EARHART);
+
+			        downloadAddr = "http://www.housing.purdue.edu/Menus/menu.aspx?hallID="+FORD+"&date=" + mMonth + "/" + mDay + "/"+ mYear;
+			        DownloadFromUrl(downloadAddr, PATH+"menu"+FORD);
+			        
+			        downloadAddr = "http://www.housing.purdue.edu/Menus/menu.aspx?hallID="+HILLENBRAND+"&date=" + mMonth + "/" + mDay + "/"+ mYear;
+			        DownloadFromUrl(downloadAddr, PATH+"menu"+HILLENBRAND);
+
+			        downloadAddr = "http://www.housing.purdue.edu/Menus/menu.aspx?hallID="+WILEY+"&date=" + mMonth + "/" + mDay + "/"+ mYear;
+			        DownloadFromUrl(downloadAddr, PATH+"menu"+WILEY);
+
+			        downloadAddr = "http://www.housing.purdue.edu/Menus/menu.aspx?hallID="+WINDSOR+"&date=" + mMonth + "/" + mDay + "/"+ mYear;
+			        DownloadFromUrl(downloadAddr, PATH+"menu"+WINDSOR);
+			       
+			        Toast.makeText(splash.this,"Menu downloaded", Toast.LENGTH_LONG).show();
+				
+			        downloadAddr = "https://www.purdue.edu/apps/ics/LabMap";
+			        if(DownloadFromUrl(downloadAddr, PATH+"lab")){
+			        	
+			        	runOnUiThread(new Runnable(){
+							public void run() {
+								Toast.makeText(splash.this,"you are not online, using caching file", Toast.LENGTH_LONG).show();
+							}
+							});
+			        }
+			        
+			        
+			        startActivity(new Intent().setClass(splash.this,LabCheckActivity.class));
+			        finish();
 			}else{
+				
 				runOnUiThread(new Runnable(){
 					public void run() {
-						Toast.makeText(splash.this,"you are not online", Toast.LENGTH_LONG).show();
-						t.setText("Connection fail, will exit in 2 seconds");
-						welcome.postDelayed(b, 2000);
+						Toast.makeText(splash.this,"Connection fail, will use cache data", Toast.LENGTH_LONG).show();
 					}
 					});
+				
+				startActivity(new Intent().setClass(splash.this,LabCheckActivity.class));
+		        finish();	
 			}
 			
 		}
 		
 	};
-	
-Runnable b = new Runnable(){
-		
-		public void run(){finish();}
-	};
+
+
 	
 	Handler welcome = new Handler();
 
@@ -122,7 +160,7 @@ Runnable b = new Runnable(){
 		setContentView(R.layout.splash);
 		t = (TextView)findViewById(R.id.progress);
 			
-		welcome.postDelayed(a, 2000);
+		welcome.postDelayed(a,1000);
 		//welcome.removeCallbacks(a);
 		
 		}

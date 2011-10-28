@@ -16,10 +16,7 @@
      <uses-library android:name="com.google.android.maps" />
         <activity android:name=".LabCheckActivity"
                   android:label="@string/app_name">
-          <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+          
         </activity>
         
         <activity 
@@ -38,9 +35,16 @@
       	   android:name=".splash"
       	   android:theme="@android:style/Theme.NoTitleBar"
         >
-      	
+      	<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-       
+        <activity 
+      	   android:name=".DiningMenu"
+      	   android:theme="@android:style/Theme.NoTitleBar"
+        ></activity>
+        
         
 	
 

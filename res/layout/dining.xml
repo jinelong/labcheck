@@ -4,17 +4,26 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-<TextView  
-	android:id="@+id/t1"
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content"
-   
-    android:textStyle="bold"
-    android:gravity="center"
-    android:background="#FDD017"
-   
-    />
-     <LinearLayout 
+    <LinearLayout 
+    	android:layout_width ="fill_parent"
+    	android:layout_height = "wrap_content"
+    	android:gravity="center"
+    
+    >
+    <TextView
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content"
+	    android:background="#FDD017"
+	    android:textStyle="bold"
+	    android:gravity="center"
+	    android:textColor="#000000"
+	   	android:text="* Denotes Vegetarian Item"
+    ></TextView>
+    
+    
+    
+    </LinearLayout>
+      <LinearLayout 
      	android:orientation="horizontal"
      	android:layout_width = "fill_parent"
      	android:layout_height="60dip"
@@ -23,22 +32,24 @@
      >
      <Spinner 
      	
-        android:id="@+id/spinner"
+        android:id="@+id/dining_spinner"
 		android:textSize="7pt"
 		android:layout_width="200dip"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingRight="10dip"
     />
-    
-    <CheckBox 
-    	android:id="@+id/check1"
+        <Button
+    	android:id="@+id/showDiningCourt"
 		android:layout_width="wrap_content"
-		android:layout_height="fill_parent" 
-		android:text="show all" 
+		android:layout_height="wrap_content" 
+		android:text="show on map" 
 		android:textColor="#000000"
-	/>
-        </LinearLayout>
+    >
+    </Button>
+
+    
+         </LinearLayout>
         
        <ListView
     	android:gravity="center_horizontal"
@@ -49,7 +60,6 @@
 	    android:drawSelectorOnTop="false"
 	    android:scrollbars="vertical"
 	    
-    
     />
    
     

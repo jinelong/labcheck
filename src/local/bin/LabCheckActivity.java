@@ -49,7 +49,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 
 
 //github addr:
-//git@github.com:jinelong/labcheck.git
+//https://jinelong@github.com/jinelong/labcheck.git
 
 
 /*
@@ -144,7 +144,7 @@ public class LabCheckActivity extends ListActivity {
 
 		
 		menu.add(0, 1, 1, "find me a PC");
-		menu.add(0, 2, 2, "find me a mac");
+		menu.add(0, 2, 2, "Dining Menu");
 		menu.add(0, 3, 3, "About");
 		menu.add(0, 4, 4, "quit");
 	
@@ -171,9 +171,9 @@ public class LabCheckActivity extends ListActivity {
 			break;
 		// about
 		case 2:
-			updateList(COMPUTER.MAC);
-			//intent.setClass(main.this, about.class);
-			//startActivity(intent);
+			Intent gotoMenu = new Intent();
+			gotoMenu.setClass(LabCheckActivity.this, DiningMenu.class);
+			this.startActivity(gotoMenu);
 			break;
 
 		// help
@@ -292,8 +292,6 @@ public class LabCheckActivity extends ListActivity {
 		
 		
 
-		Toast toast = Toast.makeText(this, list.size() + " are available",  Toast.LENGTH_SHORT);
-    	toast.show();
     	Collections.sort(list, new seqComparator());
     	
 		SimpleAdapter listAdapter = new SimpleAdapter(this, list, R.layout.list_config, new String[] { "buildingAndRoom", "status" },new int[] { R.id.room, R.id.status});
@@ -369,7 +367,7 @@ public class LabCheckActivity extends ListActivity {
         String b = "http://www.purdue.edu/";
        // t.setVisibility(View.INVISIBLE);
         
-        //DownloadFromUrl(a, "/mnt/sdcard/lab");
+        //DownloadFromUrl(a, "/sdcard/lab");
         
         //FileInputStream fstream = null;
        
@@ -390,7 +388,6 @@ public class LabCheckActivity extends ListActivity {
         
         t.setText(content);
         t.setTextColor(Color.BLACK);
-        t.setBackgroundColor(Color.rgb(205,173,0));
         t.setVisibility(View.VISIBLE);
         
         //updateList(roomAvailable, COMPUTER.ALL);
@@ -482,9 +479,9 @@ public class LabCheckActivity extends ListActivity {
     
     
     private void read() throws IOException {
-    	String a ;
+    
         Log.d("downloader", "Reading from file.");
-        File fFileName = new File("/mnt/sdcard/lab");
+        File fFileName = new File("/sdcard/lab");
         Scanner scanner = new Scanner(new FileInputStream(fFileName));
     
         Pattern p = Pattern.compile("(^\\s+)?maparray\\[\\d+\\]\\[4\\]");
