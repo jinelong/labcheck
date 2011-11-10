@@ -38,15 +38,32 @@
       	   android:name=".splash"
       	   android:theme="@android:style/Theme.NoTitleBar"
         >
+      	
       	<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+      	
+      
+      	
+      	
+      	
         </activity>
         <activity 
       	   android:name=".DiningMenu"
       	   android:theme="@android:style/Theme.NoTitleBar"
         ></activity>
+        <activity 
+      	   android:name=".newsActivity"
+      	   android:theme="@android:style/Theme.NoTitleBar"
+        ></activity>
+         <activity 
+      	   android:name=".bookSearch"
+      	   android:theme="@android:style/Theme.NoTitleBar"
+        >
+       	 
+      	
+        </activity>
         
         
 	

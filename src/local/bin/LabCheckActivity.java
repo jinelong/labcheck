@@ -150,54 +150,6 @@ public class LabCheckActivity extends ListActivity {
 	    return false;
 	}
 	
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
-
-		
-		menu.add(0, 1, 1, "TabView");
-		menu.add(0, 2, 2, "Dining Menu");
-		menu.add(0, 3, 3, "About");
-		menu.add(0, 4, 4, "quit");
-	
-		return super.onCreateOptionsMenu(menu);
-
-	}
-
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
-
-		switch (item.getItemId()) {
-		
-		case 4:
-			finish();
-			break;
-
-		case 3:
-			
-			Intent gotoAbout = new Intent();
-			gotoAbout.setClass(LabCheckActivity.this, about.class);
-			this.startActivity(gotoAbout);
-
-
-			break;
-		// about
-		case 2:
-			Intent gotoMenu = new Intent();
-			gotoMenu.setClass(LabCheckActivity.this, DiningMenu.class);
-			this.startActivity(gotoMenu);
-			break;
-
-		// help
-		case 1:
-			Intent gotoTab = new Intent();
-			gotoTab.setClass(LabCheckActivity.this, tab.class);
-			this.startActivity(gotoTab);
-			break;
-		}// switch
-		return super.onOptionsItemSelected(item);
-	}
-	
-	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub

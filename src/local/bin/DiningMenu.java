@@ -62,6 +62,9 @@ public class DiningMenu  extends ListActivity {
 	ArrayList<diningCourt> diningList = new ArrayList<diningCourt>();
 	ArrayAdapter<CharSequence> adapter;
 	Button showDC ;
+	
+	
+	
 	public boolean DownloadFromUrl(String imageURL, String fileName) {  //this is the downloader method
         try {
                 URL url = new URL(imageURL); //you can write here any link

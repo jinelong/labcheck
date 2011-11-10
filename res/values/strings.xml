@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, LabCheckActivity!</string>
-    <string name="app_name">LabCheck</string>
+    <string name="app_name">Purude Kiosk</string>
     <string name="lab_check_addr">https://www.purdue.edu/apps/ics/LabMap</string>
     <string name="about">Reid wants subway</string>
     
@@ -19,7 +19,14 @@
 	    <item>Hillenbrand</item>
 	    <item>Wiley</item>
 	    <item>Windsor</item>
-	    
+    </string-array>
+    
+    <string-array name = "news">
+   		<item>Feature</item>
+	    <item>Academic</item>
+	    <item>Faculty</item>
+	    <item>Events</item>
+	    <item>General</item>
     </string-array>
     
 </resources>
