@@ -61,9 +61,14 @@
       	   android:name=".bookSearch"
       	   android:theme="@android:style/Theme.NoTitleBar"
         >
-       	 
-      	
         </activity>
+        
+        <activity 
+      	   android:name=".load"
+      	   android:theme="@android:style/Theme.NoTitleBar"
+        >
+        </activity>
+        
         
         
 	

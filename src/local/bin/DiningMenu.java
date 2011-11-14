@@ -19,6 +19,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 import local.bin.LabCheckActivity.SpinnerOnSelectedListener;
 import local.bin.LabCheckActivity.seqComparator;
 
@@ -36,10 +37,13 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class DiningMenu  extends ListActivity {
 	
@@ -54,8 +58,10 @@ public class DiningMenu  extends ListActivity {
 	//default earhart
 	double currentLA = 40.42575;
 	double currentLO = -86.92499;
-	
+	private CheckBox vege = null;
+	boolean vegeOnly = false;
 	private final String PATH = "/sdcard/";
+	int currentChoice = EARHART;
 	
 	public ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 	Spinner selectDC ;
@@ -151,6 +157,7 @@ public class DiningMenu  extends ListActivity {
 
 		list.clear();
 		int index = 0;
+		currentChoice = type;
 		switch (type){
 			case EARHART: index = 0;currentLA = 40.42575; currentLO = -86.92499;currentDC = "Earhart";break;//40.42575	-86.92499
 			case FORD: index = 1;currentLA = 40.43211;currentLO = -86.91965; currentDC = "Ford";break;//40.43211	-86.91965
@@ -167,17 +174,29 @@ public class DiningMenu  extends ListActivity {
 					String placeName = diningList.get(index).place.get(i).name ;
 					String menu = "";
 					
-					for(int j=0;j<diningList.get(index).place.get(i).food.size();j++)
-						menu += diningList.get(index).place.get(i).food.get(j)+"\n";
+					for(int j=0;j<diningList.get(index).place.get(i).food.size();j++){
+						if(vegeOnly){
+							if(diningList.get(index).place.get(i).food.get(j).contains("*"))
+								menu += diningList.get(index).place.get(i).food.get(j)+"\n";
+						}
+						else
+							menu += diningList.get(index).place.get(i).food.get(j)+"\n";
+						
+					}
+					if(!menu.equals("")){
+						tempHash = new HashMap<String, String>();
+						tempHash.put("place", placeName);
+						tempHash.put("menu", menu);
+								
+						list.add(tempHash);
+						
+					}
+						
 					
 					Log.d("menu",placeName);
 					Log.d("menu",menu);
 					
-					tempHash = new HashMap<String, String>();
-					tempHash.put("place", placeName);
-					tempHash.put("menu", menu);
-							
-					list.add(tempHash);
+					
 	
 				}
 
@@ -331,6 +350,23 @@ public class DiningMenu  extends ListActivity {
 	    	
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.dining);
+	        
+	    	vege = (CheckBox)findViewById(R.id.check2);
+	    	vege.setOnCheckedChangeListener(new OnCheckedChangeListener()
+	         {
+	             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+	             {
+	                 if ( isChecked )
+	                	 vegeOnly = true;
+	                 	
+	                 else
+	                	 vegeOnly = false;
+	                 
+	             	updateList(currentChoice);
+	              
+	             }
+	         });
+
 	        
 	        showDC = (Button)findViewById(R.id.showDiningCourt);
 	        showDC.setOnClickListener(new buttonListen());

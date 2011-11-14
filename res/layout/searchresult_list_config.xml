@@ -21,7 +21,7 @@
     android:layout_height="wrap_content"
     android:paddingRight="10dip"
     android:paddingTop="1dip"
-   
+    android:paddingBottom="1dip"
     android:paddingLeft="10dip"
     android:gravity="top"
     android:orientation="horizontal"
@@ -30,16 +30,16 @@
   
   <TextView
   
-  	android:id="@+id/place"
+  	android:id="@+id/title"
   	android:layout_width="fill_parent"
-  	android:textSize="9pt"
+  	android:textSize="8pt"
   	android:layout_height="wrap_content"
-	android:gravity="left"
+	android:gravity="center"
   	android:singleLine="true"
   	android:paddingRight="6dip"
   	android:textColor="#000000"
   	android:textStyle="bold"
-  	
+  	android:background="#FDD017"
   	
   />
   </LinearLayout>
@@ -50,19 +50,18 @@
    	android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:paddingRight="5dip"
-    android:paddingLeft="5dip"
+    android:paddingLeft="15dip"
     android:paddingTop = "5dip"
     android:gravity="center"
     android:orientation="horizontal"
-   
+   android:paddingBottom = "5dip"
    >
 	 <TextView
 	 
-	 	android:id="@+id/dish"
-	 	android:textSize="6pt"
+	 	android:id="@+id/info"
+	 	android:textSize="5pt"
 	 	android:layout_width="fill_parent"
-	 	android:layout_height="wrap_content"
-	 	android:paddingLeft="15dip"
+	 	android:layout_height="fill_parent"
 	 	android:gravity="left"
 	 	android:textColor="#000000"
 	 	/>

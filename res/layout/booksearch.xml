@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+  
+    
+    
+      <LinearLayout 
+     	android:orientation="horizontal"
+     	android:layout_width = "fill_parent"
+     	android:layout_height="50dip"
+     	android:background="@drawable/bubble_lightgrey"
+     	android:gravity="center"
+     >
+     
+     <EditText 
+        android:id="@+id/searchbar"
+        android:hint="Book Name"
+		android:textSize="10pt"
+		android:singleLine="true"
+		android:layout_width="200dip"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingRight="10dip"
+    />
+    <Button
+    	android:id="@+id/searchgo"
+    	android:gravity="center"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:text="search" 
+		android:textColor="#000000"
+    ></Button>
+        
+ 
+         </LinearLayout>
+        
+       <ListView
+    	android:gravity="center_horizontal"
+	    android:id="@id/android:list"
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:drawSelectorOnTop="false"
+	    android:scrollbars="vertical"
+	    
+    />
+   
+    
+</LinearLayout>

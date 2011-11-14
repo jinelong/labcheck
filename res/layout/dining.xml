@@ -11,6 +11,7 @@
 	    android:background="#FDD017"
 	    android:textStyle="bold"
 	    android:gravity="center"
+	    android:textSize="5pt"
 	    android:textColor="#000000"
 	   	android:text="* Denotes Vegetarian Item"
     ></TextView>
@@ -18,18 +19,30 @@
       <LinearLayout 
      	android:orientation="horizontal"
      	android:layout_width = "fill_parent"
-     	android:layout_height="60dip"
-     	android:background="@drawable/bubble_grey"
+		android:layout_height="50dip"  
+
+     	android:background="@drawable/bubble_lightgrey"
      	android:gravity="center"
      >
      <Spinner 
         android:id="@+id/dining_spinner"
 		android:textSize="7pt"
-		android:layout_width="200dip"
+		android:layout_width="100dip"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingRight="10dip"
+        android:paddingRight="5dip"
     />
+      <CheckBox 
+    	android:id="@+id/check2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:text="vegetarian" 
+		android:gravity="center"
+		android:paddingRight="5dip"
+		
+		android:textColor="#000000"
+	/>
+	
         <Button
     	android:id="@+id/showDiningCourt"
     	android:gravity="center"
