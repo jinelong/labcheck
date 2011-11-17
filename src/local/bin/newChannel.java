@@ -91,7 +91,7 @@ public class newChannel {
 		//Log.d("desc", desc);
 		String link = getTextValue(e, "link");
 
-		article a = new article(date, title, desc, link);
+		article a = new article(date, title.trim(), desc.trim(), link.trim());
 		return a;
 
 	}

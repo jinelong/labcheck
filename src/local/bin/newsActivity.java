@@ -7,6 +7,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -44,6 +45,8 @@ public class newsActivity extends ListActivity{
 	    	
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.news);
+	        
+	        
 	        myNews = new newChannel();
 	       
 	        adapter = ArrayAdapter.createFromResource(this, R.array.news, android.R.layout.simple_spinner_item);

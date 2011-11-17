@@ -18,6 +18,8 @@ import java.util.Scanner;
 import org.apache.http.util.ByteArrayBuffer;
 
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.Toast;
 
 public class libraryParser {
 	
@@ -36,6 +38,8 @@ public class libraryParser {
 	public ArrayList<searchBookResult>   bookSearch(String query){
 		retval.clear();
 		int counter = 0;
+		
+		
 
 		String queryAddr = "http://catalog.lib.purdue.edu/Find/Search/Home?lookfor=";
 		String searchResultPage = query+".htm";

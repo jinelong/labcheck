@@ -32,6 +32,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -253,6 +254,17 @@ public class DiningMenu  extends ListActivity {
 
     			  String buffer = new String(strLine);
 
+    			  if(buffer.contains("There are no items available for this meal")){
+    				  
+
+		        	Toast t = Toast.makeText(DiningMenu.this,"not able to fetch content, are you sure dining courts are open?", Toast.LENGTH_SHORT);
+		        	t.setGravity(Gravity.CENTER, 0, 0);
+		        	t.show();
+    				  return;
+    				  
+    			  }
+    			  
+    			  
     			 int  s=buffer.indexOf(newStand, olde);
     			 int ds = buffer.indexOf(newDish,olde);
 

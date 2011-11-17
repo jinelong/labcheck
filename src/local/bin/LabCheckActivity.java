@@ -31,6 +31,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -90,6 +91,8 @@ public class LabCheckActivity extends ListActivity {
 	private CheckBox showAll = null;
 	private boolean showAllLabs = false;
 	private int currentOpt = 0;
+	final String PATH = "/sdcard/";
+	final String fileName = "lab";
 	
 	public ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 	ArrayAdapter<CharSequence> adapter;
@@ -332,10 +335,9 @@ public class LabCheckActivity extends ListActivity {
         selectStation.setOnItemSelectedListener(new SpinnerOnSelectedListener());
     
        
-        String a = "https://www.purdue.edu/apps/ics/LabMap";
-        String b = "http://www.purdue.edu/";
+        //String a = "https://www.purdue.edu/apps/ics/LabMap";
+        //String b = "http://www.purdue.edu/";
        // t.setVisibility(View.INVISIBLE);
-        
         //DownloadFromUrl(a, "/sdcard/lab");
         
         //FileInputStream fstream = null;
@@ -450,7 +452,16 @@ public class LabCheckActivity extends ListActivity {
     private void read() throws IOException {
     
         Log.d("downloader", "Reading from file.");
-        File fFileName = new File("/sdcard/lab");
+        File fFileName = new File(PATH+fileName);
+        
+        if(!fFileName.exists()){
+        	
+        	Toast t = Toast.makeText(LabCheckActivity.this,"you are offline and no cache file detected, please try later", Toast.LENGTH_SHORT);
+        	t.setGravity(Gravity.CENTER, 0, 0);
+        	t.show();
+        	return;
+        	
+        }
         Scanner scanner = new Scanner(new FileInputStream(fFileName));
     
         Pattern p = Pattern.compile("(^\\s+)?maparray\\[\\d+\\]\\[4\\]");
@@ -508,49 +519,23 @@ public class LabCheckActivity extends ListActivity {
         
         finally{
         	 scanner.close();
+        	 
         }
       }//read
    
-
-	public void DownloadFromUrl(String imageURL, String fileName) {  //this is the downloader method
-                try {
-                        URL url = new URL(imageURL); //you can write here any link
-                        File file = new File(fileName);
- 
-                        long startTime = System.currentTimeMillis();
-                        Log.d("downloader", "download begining");
-                        Log.d("downloader", "download url:" + url);
-                        Log.d("downloader", "downloaded file name:" + fileName);
-                        /* Open a connection to that URL. */
-                        URLConnection ucon = url.openConnection();
- 
-                        /*
-                         * Define InputStreams to read from the URLConnection.
-                         */
-                        InputStream is = ucon.getInputStream();
-                        BufferedInputStream bis = new BufferedInputStream(is);
- 
-                        /*
-                         * Read bytes to the Buffer until there is nothing more to read(-1).
-                         */
-                        ByteArrayBuffer baf = new ByteArrayBuffer(50);
-                        int current = 0;
-                        while ((current = bis.read()) != -1) {
-                                baf.append((byte) current);
-                        }
- 
-                        /* Convert the Bytes read to a String. */
-                        FileOutputStream fos = new FileOutputStream(file);
-                        fos.write(baf.toByteArray());
-                        fos.close();
-                        Log.d("downloader", "download ready in"
-                                        + ((System.currentTimeMillis() - startTime) / 1000)
-                                        + " sec");
- 
-                } catch (IOException e) {
-                        Log.d("downloader", "Error: " + e);
-                }
- 
+    @Override
+    public void onResume(){
+    	
+    	File fFileName = new File(PATH+fileName);
+        
+        if(!fFileName.exists()){
+        	Toast t = Toast.makeText(LabCheckActivity.this,"you are offline and no cache file detected, please try later", Toast.LENGTH_LONG);
+        	t.setGravity(Gravity.CENTER, 0, 0);
+        	t.show();
+			
+        	
         }
-    
+        super.onResume();
+    }
+	
 }

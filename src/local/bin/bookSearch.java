@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -20,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 
 public class bookSearch extends ListActivity{
@@ -40,7 +42,6 @@ public class bookSearch extends ListActivity{
 	        
 	       
 	        inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
-	        
 	        searchGo = (Button)findViewById(R.id.searchgo);
 	        searchBar = (EditText)findViewById(R.id.searchbar);
 	        searchBar.setOnClickListener(new clearBox());
@@ -48,6 +49,20 @@ public class bookSearch extends ListActivity{
 	        searchGo.setOnClickListener(new buttonListen());
 	        
 	        search = new libraryParser();
+	        
+	       
+	        searchBar.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+	            @Override
+	            public void onFocusChange(View v, boolean hasFocus) {
+	                if (hasFocus) {
+	                    //dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+	                    inputManager.toggleSoftInputFromWindow(searchBar.getApplicationWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+	                }
+	            }
+	        });
+	        
+	        
+	        
 	        
 	}
 	 class clearBox implements OnClickListener{
@@ -62,11 +77,13 @@ public class bookSearch extends ListActivity{
 			
 			@Override
 			public void onClick(View v){
+				
+				
 				String query = "";
 				
+				inputManager.hideSoftInputFromWindow(searchBar.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 				 
-				 inputManager.hideSoftInputFromWindow(searchBar.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-				  
+				
 				if(searchBar.getText().toString().length()>0)
 						query = searchBar.getText().toString();
 				Log.d("search", "query:	 " + query);
@@ -113,7 +130,8 @@ public class bookSearch extends ListActivity{
 	
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
-	 
+
+       
 		
 	 String url = "http://catalog.lib.purdue.edu/Find/Record/" + bookList.get(position).id;
 	 Intent i = new Intent(Intent.ACTION_VIEW, 

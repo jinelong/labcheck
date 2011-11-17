@@ -38,7 +38,7 @@ public class about extends Activity  {
 		
 		text = (TextView)findViewById(R.id.about);
 		text.setTextSize(15);
-		text.setText("happy birthday reid");
+		text.setText("By Jin & Reid\nversion 0.1");
 		ok_about = (Button)findViewById(R.id.ok_about);
 		ok_about.setText("OK");
 		eggB = (Button)findViewById(R.id.egg);
